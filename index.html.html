@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agree to Disagree | Skills Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a2540;
+            --navy-light: #1e3a5f;
+            --gold: #ffd700;
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --dark: #2c3e50;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        .header {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo-section { display: flex; align-items: center; gap: 25px; }
+        .logo-img { height: 50px; width: auto; }
+        
+        .title-group h1 {
+            font-size: 2.2em;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+        
+        .title-group p { color: var(--navy-light); font-size: 1.1em; font-weight: 600; }
+        
+        .phase-indicator {
+            background: linear-gradient(135deg, var(--gold), #ffed4e);
+            color: var(--navy);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            margin-bottom: 25px;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+        }
+        
+        .card-header h2 { font-size: 1.6em; font-weight: 700; color: var(--navy); }
+        
+        .pair-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .pair-btn {
+            background: linear-gradient(135deg, var(--light), #e9ecef);
+            border: 3px solid transparent;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: var(--navy);
+        }
+        
+        .pair-btn:hover { transform: scale(1.05); border-color: var(--gold); }
+        
+        .pair-btn.selected {
+            background: linear-gradient(135deg, var(--gold), #ffed4e);
+            color: var(--navy);
+            border-color: var(--navy);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .scenario-display {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .scenario-number {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            display: inline-block;
+        }
+        
+        .scenario-text {
+            font-size: 1.8em;
+            font-weight: 700;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .position-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .position-card {
+            background: linear-gradient(135deg, var(--light), #e9ecef);
+            border: 4px solid transparent;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .position-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--gold);
+        }
+        
+        .position-card.selected {
+            background: linear-gradient(135deg, var(--gold), #ffed4e);
+            color: var(--navy);
+            border-color: var(--navy);
+            box-shadow: 0 10px 35px rgba(255, 215, 0, 0.5);
+        }
+        
+        .position-card h3 { font-size: 2.5em; font-weight: 900; margin-bottom: 15px; }
+        .position-card p { font-size: 1.2em; line-height: 1.6; color: var(--gray); }
+        .position-card.selected p { color: var(--navy); }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
+        
+        .timer-display {
+            font-size: 5em;
+            font-weight: 900;
+            color: var(--navy);
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .timer-display.warning { color: #ff6b6b; animation: pulse 1s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .timer-controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary { background: linear-gradient(135deg, var(--navy), var(--navy-light)); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(10, 37, 64, 0.4); }
+        
+        .btn-secondary { background: linear-gradient(135deg, var(--gold), #ffed4e); color: var(--navy); }
+        .btn-secondary:hover { transform: translateY(-3px); }
+        
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .position-label {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .response-area {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            border: 3px solid var(--light);
+            border-radius: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1em;
+            resize: vertical;
+        }
+        
+        .response-area:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+        
+        .response-area:disabled { background: var(--light); }
+        
+        .partner-response {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--gold);
+            margin-top: 15px;
+        }
+        
+        .partner-response h4 { color: var(--navy); margin-bottom: 10px; font-weight: 700; }
+        .partner-response p { color: var(--gray); line-height: 1.6; }
+        
+        .hidden { display: none; }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+        
+        .footer a { color: var(--gold); text-decoration: none; font-weight: 700; }
+        
+        @media (max-width: 768px) {
+            .content-grid, .position-grid { grid-template-columns: 1fr; }
+            .title-group h1 { font-size: 1.6em; }
+            .timer-display { font-size: 3em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-section">
+                <svg class="logo-img" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#0a2540"/>
+                    <text x="120" y="45" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#0a2540">SKILLS</text>
+                    <text x="120" y="80" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#0a2540">BANK</text>
+                </svg>
+                <div class="title-group">
+                    <h1>🤝 Agree to Disagree</h1>
+                    <p>Crucial Conversations Activity</p>
+                </div>
+            </div>
+            <div class="phase-indicator" id="phaseIndicator">Setup Phase</div>
+        </div>
+
+        <div id="setupPhase">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">👥</div>
+                    <h2>Select Your Pair Number</h2>
+                </div>
+                <p style="color: var(--gray); font-size: 1.1em; margin-bottom: 20px;">
+                    Each pair will receive a different scenario for discussion. Choose your pair number:
+                </p>
+                <div class="pair-grid">
+                    <button class="pair-btn" onclick="selectPair(1)">Pair 1</button>
+                    <button class="pair-btn" onclick="selectPair(2)">Pair 2</button>
+                    <button class="pair-btn" onclick="selectPair(3)">Pair 3</button>
+                    <button class="pair-btn" onclick="selectPair(4)">Pair 4</button>
+                    <button class="pair-btn" onclick="selectPair(5)">Pair 5</button>
+                    <button class="pair-btn" onclick="selectPair(6)">Pair 6</button>
+                    <button class="pair-btn" onclick="selectPair(7)">Pair 7</button>
+                    <button class="pair-btn" onclick="selectPair(8)">Pair 8</button>
+                    <button class="pair-btn" onclick="selectPair(9)">Pair 9</button>
+                    <button class="pair-btn" onclick="selectPair(10)">Pair 10</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="positionPhase" class="hidden">
+            <div class="scenario-display">
+                <div class="scenario-number" id="scenarioNumber"></div>
+                <div class="scenario-text" id="scenarioText"></div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎭</div>
+                    <h2>Choose Your Position</h2>
+                </div>
+                <p style="color: var(--gray); font-size: 1.1em; margin-bottom: 20px;">
+                    Decide who will argue FOR and who will argue AGAINST the statement:
+                </p>
+                <div class="position-grid">
+                    <div class="position-card" onclick="selectPosition('A')">
+                        <h3>👍 Position A</h3>
+                        <p>Argue FOR the statement</p>
+                        <p style="margin-top: 10px; font-weight: 600;">Support and defend this perspective</p>
+                    </div>
+                    <div class="position-card" onclick="selectPosition('B')">
+                        <h3>👎 Position B</h3>
+                        <p>Argue AGAINST the statement</p>
+                        <p style="margin-top: 10px; font-weight: 600;">Challenge and question this perspective</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="discussionPhase" class="hidden">
+            <div class="scenario-display">
+                <div class="scenario-number" id="scenarioNumber2"></div>
+                <div class="scenario-text" id="scenarioText2"></div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">⏱️</div>
+                        <h2>Discussion Timer</h2>
+                    </div>
+                    <div class="timer-display" id="timerDisplay">10:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer()">Start</button>
+                        <button class="btn btn-secondary" onclick="pauseTimer()">Pause</button>
+                        <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💬</div>
+                        <h2>Your Position</h2>
+                    </div>
+                    <div class="position-label" id="yourPositionLabel"></div>
+                    <p style="color: var(--gray); margin-bottom: 15px;" id="positionInstructions"></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">✍️</div>
+                    <h2>Your Response & Arguments</h2>
+                </div>
+                <textarea class="response-area" id="myResponse" placeholder="Type your key arguments and reasoning here..."></textarea>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="shareResponse()">📤 Share with Partner</button>
+            </div>
+
+            <div class="card hidden" id="partnerResponseCard">
+                <div class="card-header">
+                    <div class="card-icon">👁️</div>
+                    <h2>Partner's Response</h2>
+                </div>
+                <div class="partner-response">
+                    <h4>Position <span id="partnerPosition"></span> Arguments:</h4>
+                    <p id="partnerResponseText">Waiting for partner to share...</p>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; font-size: 1.3em; padding: 20px; margin-top: 20px;" onclick="completeActivity()">✅ Complete Activity</button>
+        </div>
+
+        <div class="footer">
+            © 2026 Skills Bank · Transformative Training Solutions · <a href="https://skillsbankme.com" target="_blank">skillsbankme.com</a>
+        </div>
+    </div>
+
+    <script>
+        const scenarios = ["Remote teams are just as productive as on-site teams.","Written communication (email, messaging) is superior to face-to-face conversations for clarity.","Good leaders never show vulnerability or doubt in front of their teams.","Flexible working hours always increase productivity.","Recognition and praise are more motivating than monetary rewards.","Fast decision-making is always better than thoroughly analyzed decisions.","Experience-based intuition is more reliable than data-driven decision-making.","Work-life balance is ultimately the employee's responsibility, not the organization's.","Cultural fit is more important than technical skills when hiring.","Managers should prioritize employee satisfaction over meeting deadlines."];
+        let selectedPair=null,selectedPosition=null,timerInterval=null,timeRemaining=600,isTimerRunning=false;
+        function selectPair(n){selectedPair=n;document.querySelectorAll('.pair-btn').forEach(b=>b.classList.remove('selected'));event.target.classList.add('selected');setTimeout(()=>{document.getElementById('setupPhase').classList.add('hidden');document.getElementById('positionPhase').classList.remove('hidden');document.getElementById('phaseIndicator').textContent='Position Selection';const i=n-1;document.getElementById('scenarioNumber').textContent=`Scenario #${n}`;document.getElementById('scenarioText').textContent=`"${scenarios[i]}"`;},300);}
+        function selectPosition(p){selectedPosition=p;document.querySelectorAll('.position-card').forEach(c=>c.classList.remove('selected'));event.target.closest('.position-card').classList.add('selected');setTimeout(()=>{document.getElementById('positionPhase').classList.add('hidden');document.getElementById('discussionPhase').classList.remove('hidden');document.getElementById('phaseIndicator').textContent='Discussion Phase';const i=selectedPair-1;document.getElementById('scenarioNumber2').textContent=`Scenario #${selectedPair}`;document.getElementById('scenarioText2').textContent=`"${scenarios[i]}"`;document.getElementById('yourPositionLabel').textContent=`You are Position ${p}`;if(p==='A'){document.getElementById('positionInstructions').textContent='Argue FOR the statement. Build your case supporting this perspective.';document.getElementById('partnerPosition').textContent='B';}else{document.getElementById('positionInstructions').textContent='Argue AGAINST the statement. Challenge and question this perspective.';document.getElementById('partnerPosition').textContent='A';}},300);}
+        function startTimer(){if(!isTimerRunning){isTimerRunning=true;timerInterval=setInterval(()=>{if(timeRemaining>0){timeRemaining--;updateTimerDisplay();}else{pauseTimer();alert('⏰ Time is up! Share your insights with the group.');}},1000);}}
+        function pauseTimer(){isTimerRunning=false;if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+        function resetTimer(){pauseTimer();timeRemaining=600;updateTimerDisplay();}
+        function updateTimerDisplay(){const m=Math.floor(timeRemaining/60),s=timeRemaining%60,d=`${m}:${s.toString().padStart(2,'0')}`,t=document.getElementById('timerDisplay');t.textContent=d;timeRemaining<120?t.classList.add('warning'):t.classList.remove('warning');}
+        function shareResponse(){const r=document.getElementById('myResponse').value;if(!r.trim()){alert('⚠️ Please write your response first!');return;}const o=selectedPosition==='A'?'B':'A',k=`pair_${selectedPair}_position_${o}`,m=`pair_${selectedPair}_position_${selectedPosition}`;localStorage.setItem(m,r);const p=localStorage.getItem(k);if(p){document.getElementById('partnerResponseText').textContent=p;document.getElementById('partnerResponseCard').classList.remove('hidden');alert('✅ Response shared! Your partner\'s response is now visible.');}else{alert('✅ Response shared! Waiting for your partner to share theirs...');const c=setInterval(()=>{const u=localStorage.getItem(k);if(u){document.getElementById('partnerResponseText').textContent=u;document.getElementById('partnerResponseCard').classList.remove('hidden');clearInterval(c);alert('✅ Your partner has shared their response!');}},2000);}}
+        function completeActivity(){alert('🎉 Activity completed! Great discussion!');if(confirm('Start a new activity?')){localStorage.clear();location.reload();}}
+        updateTimerDisplay();
+    </script>
+</body>
+</html>
